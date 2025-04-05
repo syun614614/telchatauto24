@@ -1,8 +1,10 @@
-// 現在のURLのクエリパラメータを取得
-const params = new URLSearchParams(window.location.search);
+// 現在のスクリプト（このスクリプト自体）のURLを取得
+const scripts = document.getElementsByTagName('script');
+const currentScript = scripts[scripts.length - 1].src; // 現在のスクリプトのURL
+const urlParams = new URL(currentScript).searchParams;
 
-// パラメータを取得
-const paramValue = params.get('name');
+// クエリパラメータを取得
+const paramValue = urlParams.get('name');
 
 let agentData = null; // グローバル変数を宣言
 let webhookCalled = false; // Webhook呼び出し済みフラグ
