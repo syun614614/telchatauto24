@@ -1,13 +1,13 @@
-// Œ»İ‚ÌURL‚ÌƒNƒGƒŠƒpƒ‰ƒ[ƒ^‚ğæ“¾
+// ç¾åœ¨ã®URLã®ã‚¯ã‚¨ãƒªãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ã‚’å–å¾—
 const params = new URLSearchParams(window.location.search);
 
-// ƒpƒ‰ƒ[ƒ^‚ğæ“¾
+// ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ã‚’å–å¾—
 const paramValue = params.get('name');
 
-let agentData = null; // ƒOƒ[ƒoƒ‹•Ï”‚ğéŒ¾
-let webhookCalled = false; // WebhookŒÄ‚Ño‚µÏ‚İƒtƒ‰ƒO
+let agentData = null; // ã‚°ãƒ­ãƒ¼ãƒãƒ«å¤‰æ•°ã‚’å®£è¨€
+let webhookCalled = false; // Webhookå‘¼ã³å‡ºã—æ¸ˆã¿ãƒ•ãƒ©ã‚°
 
-// Webhook‚ğŒÄ‚Ño‚·ŠÖ”
+// Webhookã‚’å‘¼ã³å‡ºã™é–¢æ•°
 async function fetchWebhookData() {
     try {
         const response = await fetch('https://hook.us2.make.com/b7lvzbakgdtl9x0pdfaaen0wmu8x68ff?name='+paramValue, {
@@ -21,16 +21,16 @@ async function fetchWebhookData() {
             throw new Error(`Error: ${response.status}`);
         }
 
-        agentData = await response.json(); // ƒf[ƒ^‚ğƒOƒ[ƒoƒ‹•Ï”‚É•Û‘¶
-        console.log('æ“¾‚µ‚½ƒf[ƒ^:', globalData);
+        agentData = await response.json(); // ãƒ‡ãƒ¼ã‚¿ã‚’ã‚°ãƒ­ãƒ¼ãƒãƒ«å¤‰æ•°ã«ä¿å­˜
+        console.log('å–å¾—ã—ãŸãƒ‡ãƒ¼ã‚¿:', agentData);
     } catch (error) {
-        console.error('ƒGƒ‰[:', error);
+        console.error('ã‚¨ãƒ©ãƒ¼:', error);
     }
 }
 
 const loadScriptAsync = (value) => {
 
-    // callfluent_paper ƒNƒ‰ƒX‚Ì—v‘f‚ğíœ
+    // callfluent_paper ã‚¯ãƒ©ã‚¹ã®è¦ç´ ã‚’å‰Šé™¤
     const leftoverElements = document.querySelectorAll(".callfluent_paper");
     leftoverElements.forEach(element => {
         element.remove();
@@ -46,21 +46,21 @@ const loadScriptAsync = (value) => {
     }
 };
 
-// ƒZƒŒƒNƒgƒƒjƒ…[‚Ì•ÏXƒCƒxƒ“ƒg‚ÉƒŠƒXƒi[‚ğ’Ç‰Á
+// ã‚»ãƒ¬ã‚¯ãƒˆãƒ¡ãƒ‹ãƒ¥ãƒ¼ã®å¤‰æ›´ã‚¤ãƒ™ãƒ³ãƒˆã«ãƒªã‚¹ãƒŠãƒ¼ã‚’è¿½åŠ 
 document.getElementById('languageSelect').addEventListener('click', (event) => {
-    if (!webhookCalled) { // Webhook‚ª‚Ü‚¾ŒÄ‚Ño‚³‚ê‚Ä‚¢‚È‚¢ê‡‚Ì‚İÀs
-        // ƒf[ƒ^æ“¾Œã‚É—˜—p
+    if (!webhookCalled) { // WebhookãŒã¾ã å‘¼ã³å‡ºã•ã‚Œã¦ã„ãªã„å ´åˆã®ã¿å®Ÿè¡Œ
+        // ãƒ‡ãƒ¼ã‚¿å–å¾—å¾Œã«åˆ©ç”¨
         fetchWebhookData().then(() => {
-            // ƒZƒŒƒNƒgƒƒjƒ…[‚ğ¶¬
+            // ã‚»ãƒ¬ã‚¯ãƒˆãƒ¡ãƒ‹ãƒ¥ãƒ¼ã‚’ç”Ÿæˆ
             generateSelectMenu();
-            webhookCalled = true; // ƒtƒ‰ƒO‚ğİ’è‚µ‚ÄÄ“xŒÄ‚Ño‚³‚ê‚È‚¢‚æ‚¤‚É‚·‚é
+            webhookCalled = true; // ãƒ•ãƒ©ã‚°ã‚’è¨­å®šã—ã¦å†åº¦å‘¼ã³å‡ºã•ã‚Œãªã„ã‚ˆã†ã«ã™ã‚‹
         });
     }
 });
 
-// ƒZƒŒƒNƒgƒƒjƒ…[‚Ì•ÏXƒCƒxƒ“ƒg‚ÉƒŠƒXƒi[‚ğ’Ç‰Á
+// ã‚»ãƒ¬ã‚¯ãƒˆãƒ¡ãƒ‹ãƒ¥ãƒ¼ã®å¤‰æ›´ã‚¤ãƒ™ãƒ³ãƒˆã«ãƒªã‚¹ãƒŠãƒ¼ã‚’è¿½åŠ 
 document.getElementById('languageSelect').addEventListener('change', (event) => {
-    const selectedValue = event.target.value; // ‘I‘ğ‚³‚ê‚½’l‚ğæ“¾
+    const selectedValue = event.target.value; // é¸æŠã•ã‚ŒãŸå€¤ã‚’å–å¾—
 
     if (webhookCalled) {
         loadScriptAsync(selectedValue);
@@ -266,8 +266,8 @@ function initializeCallFluent(id, callagent, endcall, callable, busyphone) {
             var t = document.createElement("div"),
                 s = (t.classList.add("inbound_call_name_container"), t.appendChild(s), t.appendChild(i), a.appendChild(o), a.appendChild(t), n.appendChild(a), document.createElement("div")),
                 r = document.createElement("button");
-            r.style.fontWeight = "bold"; // ‘¾šƒXƒ^ƒCƒ‹‚ğ“K—p
-            r.style.fontFamily = "Noto Sans, sans-serif"; // ƒtƒHƒ“ƒgƒtƒ@ƒ~ƒŠ[‚ğ“K—p
+            r.style.fontWeight = "bold"; // å¤ªå­—ã‚¹ã‚¿ã‚¤ãƒ«ã‚’é©ç”¨
+            r.style.fontFamily = "Noto Sans, sans-serif"; // ãƒ•ã‚©ãƒ³ãƒˆãƒ•ã‚¡ãƒŸãƒªãƒ¼ã‚’é©ç”¨
             r.textContent = callagent, s.appendChild(r), s.classList.add("callfluent_callbut"), n.appendChild(s), e.appendChild(n), c.parentNode.insertBefore(e, c.nextSibling);
             let l = !1;
 
@@ -291,7 +291,7 @@ function initializeCallFluent(id, callagent, endcall, callable, busyphone) {
     })();
 }
 
-// ƒZƒŒƒNƒgƒƒjƒ…[‚ğ¶¬‚·‚éŠÖ”
+// ã‚»ãƒ¬ã‚¯ãƒˆãƒ¡ãƒ‹ãƒ¥ãƒ¼ã‚’ç”Ÿæˆã™ã‚‹é–¢æ•°
 function generateSelectMenu() {
     const select = document.getElementById('languageSelect');
 
